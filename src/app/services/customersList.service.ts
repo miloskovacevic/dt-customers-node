@@ -26,4 +26,14 @@ export class CustomersListService {
         return this.http.get<{message: string, customers: Customer[]}>(this.url).toPromise();
     }
 
+    addCustomer(customer: Customer) {
+        // save or update based on customer id
+        if (customer.customerID == 0) {
+            return this.http.post<{message: string, customer: Customer}>(this.url, customer).toPromise();
+        } else {
+            // update
+            // return this.http.patch<{message: string, customer: Customer}>(this.url, customer).toPromise();
+        }
+    }
+
 }
