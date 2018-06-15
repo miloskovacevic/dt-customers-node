@@ -1,0 +1,124 @@
+
+      
+         
+    
+    
+            
+      
+   
+
+
+
+
+
+    <div class="col-lg-12" style="margin-top: 2%;">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h4>{{title}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12" *ngIf="customer"> 
+                <form id="editUser" name="form" #f="ngForm" novalidate (keydown.enter)="$event.preventDefault()" autocomplete="false">
+                    <div class="row">
+                            <div class="col-md-6" style="border: 1px solid #5cb85c; padding: 1%;"> 
+                                <div style="margin-bottom: 2%;">
+                                     Personal data 
+                                </div>
+                               
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>First Name:</label>
+                                            <input autofocus type="text" class="form-control" name="firstname" [(ngModel)]="customer.name.first" #name="ngModel" (change)="onInputChange($event)" />
+                                            <div class="help-block text-danger errorMessage"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                         <div class="form-group">
+                                            <label>Last Name:</label>
+                                            <input type="text" class="form-control" name="lastname" [(ngModel)]="customer.name.last" #lastName="ngModel" (change)="onInputChange($event)" />
+                                            <div class="help-block text-danger errorMessage"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">  
+                                       <div class="form-group" style="height: 45px">
+                                            <label>Birthday:</label>
+                                            <div class="input-group">
+                                                <!--<input type="text" name="effectiveDate" class="form-control" bsDatepicker #dpEf="bsDatepicker" [(bsValue)]="customer.birthday"
+                                                    [bsConfig]="bsConfig">-->
+                                                <!--<div class="input-group-btn">
+                                                    <button class="btn btn-success" (click)="dpEf.show() "><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Open</button>
+                                                </div>-->
+                                            </div>
+                                            <div class="help-block text-danger errorMessage"></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6"> 
+                                        <div class="form-group">
+                                            <label>Gender: </label>
+                                            <ngx-select [formControl]="ngxControl"
+                                                    [allowClear]="true"
+                                                    [defaultValue]="doNgxDefault()"
+                                                    [items]="items"
+                                                    placeholder="No gender selected"
+                                                    (select)="doSelect($event)"
+                                                    (remove)="doRemove($event)"
+                                                   >
+                                            </ngx-select>
+                                            <div class="help-block text-danger errorMessage"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="border: 1px solid #5cb85c; padding: 1%;">
+                                <div style="margin-bottom: 2%;">
+                                    Application data 
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Customer Lifetime Value:</label>
+                                            <input autofocus type="number" class="form-control" name="customerLifetimeValue" [(ngModel)]="customer.customerLifetimeValue" #name="ngModel" (change)="onInputChange($event)" />
+                                            <div class="help-block text-danger errorMessage"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">  
+                                       <div class="form-group" style="height: 45px">
+                                            <label>Last Contact:</label>
+                                            <div class="input-group">
+                                                <!--<input type="text" name="effectiveDate" class="form-control" bsDatepicker #dpEf2="bsDatepicker" [(bsValue)]="customer.lastContact"
+                                                    [bsConfig]="bsConfig">-->
+                                                <!--<div class="input-group-btn">
+                                                    <button class="btn btn-success" (click)="dpEf2.show() "><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Open</button>
+                                                </div>-->
+                                            </div>
+                                            <div class="help-block text-danger errorMessage"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12 divErrorMessage" hidden>
+                            <div class="alert">
+                                <span class="errorText"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <a class="btn btn-warning" [routerLink]="['/customersList']"><i class="fa fa-times"></i>Back</a>
+                <button class="btn btn-success pointer" (click)="submit()"><i class="glyphicon glyphicon-ok"></i> Save customer</button>
+            </div>
+        </div>
+    </div>
+
+
+
