@@ -48,10 +48,25 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
 
     getData() {
         console.log('trazim podatke...');
+        // if (!SessionCacheHelper.getGridData('customers')) {
+        //     this._customersListService.getCustomers()
+        //     .then((customers: Customer[]) => {
+        //         this.data = customers;
+        //         this.rows = this.data;
+        //         SessionCacheHelper.setGridData('customers', this.data);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
+        // } else {
+        //     this.data = SessionCacheHelper.getGridData('customers');
+        //     this.rows = this.data;
+        // }
         if (!SessionCacheHelper.getGridData('customers')) {
-            this._customersListService.getCustomers().toPromise()
-            .then((customers: Customer[]) => {
-                this.data = customers;
+            this._customersListService.getCustomers()
+            .then((data) => {
+                console.log(data);
+                this.data = data.customers;
                 this.rows = this.data;
                 SessionCacheHelper.setGridData('customers', this.data);
             })

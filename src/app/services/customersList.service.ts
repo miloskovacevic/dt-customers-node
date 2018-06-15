@@ -5,6 +5,9 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class CustomersListService {
+
+    url: string = 'http://localhost:3000/api/customers';
+
     constructor(private http: HttpClient) {
     }
 
@@ -19,8 +22,8 @@ export class CustomersListService {
                 });
     }
 
-    getCustomers(): Observable<any> {
-        return this.http.get('./assets/customers-sample.json');
+    getCustomers() {
+        return this.http.get<{message: string, customers: Customer[]}>(this.url).toPromise();
     }
 
 }

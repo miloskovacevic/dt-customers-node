@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomersListRoutingModule } from './customersList-routing.module';
 import { EditComponent } from './edit/edit.component';
-// import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { NgxSelectModule } from 'ngx-select-ex';
         CommonModule,
         CustomersListRoutingModule,
         SharedModule,
-        // BsDatepickerModule.forRoot(),
+        BsDatepickerModule.forRoot(),
         NgxSelectModule
     ],
     declarations: [
