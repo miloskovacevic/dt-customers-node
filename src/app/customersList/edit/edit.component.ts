@@ -5,7 +5,7 @@ import { CustomersListService } from './../../services/customersList.service';
 import { Component, ViewChild, OnInit, Injector, HostListener, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -30,14 +30,6 @@ export class EditComponent  implements OnInit, OnDestroy {
 
     constructor(private injector: Injector, private _customersListService: CustomersListService, private router: Router) {
         this.customer = new Customer();
-        // this._ngxDefaultTimeout = setTimeout(() => {
-        //     this._ngxDefaultInterval = setInterval(() => {
-        //         const idx = Math.floor(Math.random() * (this.items.length - 1));
-        //         this._ngxDefault = this.items[idx];
-        //         // console.log('new default value = ', this._ngxDefault);
-        //     }, 2000);
-        // }, 2000);
-
 
         this.activeRouter = injector.get(ActivatedRoute);
         this.title = 'Edit';
@@ -110,7 +102,7 @@ export class EditComponent  implements OnInit, OnDestroy {
     public doNgxDefault(): any {
         return this.customer.gender;
     }
- 
+
     public inputTyped = (source: string, text: string) => console.log('SingleDemoComponent.inputTyped', source, text);
  
     public doSelect = (value: any) => console.log('SingleDemoComponent.doSelect', value);
@@ -127,9 +119,5 @@ export class EditComponent  implements OnInit, OnDestroy {
             const htmlElement: HTMLElement =  document.getElementById(k);
             htmlElement.innerHTML = errorJson[k].message;
         });
-
-        // errorJson.forEach((error) => {
-
-        // });
     }
 }

@@ -91,8 +91,8 @@ app.patch('/api/customers/:id', (req, res, next) => {
             message:'Customer successfully updated!',
             customer: customer
         });
-    }).catch(e => {
-        res.status(400).send();
+    }).catch(err => {
+        res.status(400).send(err);
     })
 });
 
@@ -112,7 +112,7 @@ app.delete('/api/customers/:id', (req, res, next) => {
         });
     })
     .catch((err) => {
-        res.status(400).send();
+        res.status(400).send(err);
     });
 })
 

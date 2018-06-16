@@ -14,7 +14,7 @@ const customerSchema = mongoose.Schema({
     },
     lastContact: {
         type: Date,
-        default: Date.now
+        required: 'You must enter last contact day.'
     },
     birthday: {
         type: Date,
@@ -26,7 +26,7 @@ const customerSchema = mongoose.Schema({
     },
     customerLifetimeValue: {
         type: Number,
-        required: 'You must provide Customer Lifetime Value.'
+        required: 'You must enter Customer Lifetime Value.'
     }
 });
 
