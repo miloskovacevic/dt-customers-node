@@ -4,10 +4,12 @@ mongoose.Promise = global.Promise;
 const customerSchema = mongoose.Schema({
     name: {
         first: {
-            type: String
+            type: String,
+            required: 'You must enter first name.'
         },
         last: {
-            type: String
+            type: String,
+            required: 'You must enter last name.'
         },
     },
     lastContact: {
@@ -23,7 +25,8 @@ const customerSchema = mongoose.Schema({
         default: 'm'
     },
     customerLifetimeValue: {
-        type: Number
+        type: Number,
+        required: 'You must provide Customer Lifetime Value.'
     }
 });
 

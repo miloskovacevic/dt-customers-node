@@ -6,11 +6,12 @@ import { Component, ViewChild, OnInit, Injector, HostListener, OnDestroy } from 
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { FormControl } from '@angular/forms';
-import { HttpErrorResponse } from "@angular/common/http";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'edit.component.html'
+    templateUrl: 'edit.component.html',
+    styleUrls: ['./edit.component.scss']
 })
 
 export class EditComponent  implements OnInit, OnDestroy {
@@ -78,12 +79,12 @@ export class EditComponent  implements OnInit, OnDestroy {
         this._customersListService.addCustomer(customer)
         .then((response) => {
             // put this in some kind of modal...
-            console.log(response.customer);
             this.router.navigate(['/customersList']);
         })
         .catch((err: HttpErrorResponse) => {
-            console.log(err.error.errors);
-
+            if (!err.error)
+                return;
+            this.errorHandler(err.error.errors);
         });
     }
 
@@ -117,4 +118,18 @@ export class EditComponent  implements OnInit, OnDestroy {
     public doRemove = (value: any) => console.log('SingleDemoComponent.doRemove', value);
  
     public doSelectOptions = (options: INgxSelectOptions[]) => console.log('SingleDemoComponent.doSelectOptions', options);
+
+
+
+    errorHandler(errorJson) {
+        Object.keys(errorJson).forEach((k) => {
+            console.log(errorJson[k]);
+            const htmlElement: HTMLElement =  document.getElementById(k);
+            htmlElement.innerHTML = errorJson[k].message;
+        });
+
+        // errorJson.forEach((error) => {
+
+        // });
+    }
 }

@@ -19,14 +19,14 @@
                                         <div class="form-group">
                                             <label>First Name:</label>
                                             <input autofocus type="text" class="form-control" name="firstname" [(ngModel)]="customer.name.first" #name="ngModel" (change)="onInputChange($event)" />
-                                            <div class="help-block text-danger errorMessage"></div>
+                                            <div id="name.first" class="help-block text-danger errorMessage"></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                          <div class="form-group">
                                             <label>Last Name:</label>
                                             <input type="text" class="form-control" name="lastname" [(ngModel)]="customer.name.last" #lastName="ngModel" (change)="onInputChange($event)" />
-                                            <div class="help-block text-danger errorMessage"></div>
+                                            <div id="name.last" class="help-block text-danger errorMessage"></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">  
@@ -69,7 +69,7 @@
                                         <div class="form-group">
                                             <label>Customer Lifetime Value:</label>
                                             <input autofocus type="number" class="form-control" name="customerLifetimeValue" [(ngModel)]="customer.customerLifetimeValue" #name="ngModel" (change)="onInputChange($event)" />
-                                            <div class="help-block text-danger errorMessage"></div>
+                                            <div id="customerLifetimeValue" class="help-block text-danger errorMessage"></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">  

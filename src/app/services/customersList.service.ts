@@ -19,11 +19,9 @@ export class CustomersListService {
         return this.http.get<{message: string, customer: Customer}>(this.url + '/' + customerId).toPromise();
     }
 
-  
-
     addCustomer(customer: Customer) {
         // save or update based on customer id
-        if (customer._id == 0) {
+        if (customer._id == 0 || customer._id == null) {
             // save
             delete customer._id;
             return this.http.post<{message: string, customer: Customer}>(this.url, customer).toPromise();
