@@ -6,6 +6,7 @@ import { Component, ViewChild, OnInit, Injector, HostListener, OnDestroy } from 
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { FormControl } from '@angular/forms';
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     moduleId: module.id,
@@ -48,9 +49,6 @@ export class EditComponent  implements OnInit, OnDestroy {
         } else {
             // geting data for one customer
             this.getCustomer(this.customer._id);
-
-            
-
             this.title = 'Edit customer';
         }
     }
@@ -61,7 +59,6 @@ export class EditComponent  implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        
     }
 
     submit() {
@@ -75,21 +72,18 @@ export class EditComponent  implements OnInit, OnDestroy {
 
         // ovde dohvatim iz session cache helpera podatke zamjenim ih i snimim...
         this.saveCustomer(this.customer);
-        console.log(this.customer);
     }
 
     saveCustomer(customer: Customer) {
-        const data: Customer[] = SessionCacheHelper.getGridData('customers');
-        SessionCacheHelper.setGridData('customers', data);
-
         this._customersListService.addCustomer(customer)
         .then((response) => {
             // put this in some kind of modal...
             console.log(response.customer);
             this.router.navigate(['/customersList']);
         })
-        .catch(err => {
-            console.log(err);
+        .catch((err: HttpErrorResponse) => {
+            console.log(err.error.errors);
+
         });
     }
 

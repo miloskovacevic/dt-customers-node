@@ -11,30 +11,25 @@ export class CustomersListService {
     constructor(private http: HttpClient) {
     }
 
-    getCustomer(customerId: Number) {
-        return this.http.get<{message: string, customer: Customer}>(this.url + '/' + customerId).toPromise();
-
-        // return this.http.get('./assets/customers-sample.json').toPromise()
-        //         .then((customers: Customer[]) => {
-        //             let customer = customers.filter(c => c.customerID == customerId)[0];
-        //             return customer;
-        //         })
-        //         .catch((err) => {
-        //             return err;
-        //         });
-    }
-
     getCustomers() {
         return this.http.get<{message: string, customers: Customer[]}>(this.url).toPromise();
     }
 
+    getCustomer(customerId: Number) {
+        return this.http.get<{message: string, customer: Customer}>(this.url + '/' + customerId).toPromise();
+    }
+
+  
+
     addCustomer(customer: Customer) {
         // save or update based on customer id
-        if (customer.customerID == 0) {
+        if (customer._id == 0) {
+            // save
+            delete customer._id;
             return this.http.post<{message: string, customer: Customer}>(this.url, customer).toPromise();
         } else {
             // update
-            // return this.http.patch<{message: string, customer: Customer}>(this.url, customer).toPromise();
+            return this.http.patch<{message: string, customer: Customer}>(this.url + '/' + customer._id, customer).toPromise();
         }
     }
 
