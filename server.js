@@ -7,6 +7,20 @@
 const app = require("./backend/app");
 const debug = require("debug")("node-angular");
 const http = require("http");
+const mongoose = require('mongoose');
+
+// import environmental variables from our variables.env file
+require('dotenv').config({ path: 'variables.env' });
+
+// Connect to our Database and handle an bad connections
+mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
+mongoose.connect(process.env.DATABASE)
+.then(() => {
+    console.log('successfuly connected to mLab...');
+})
+.catch((err) => {
+    console.log('Error while connecting to mLab servers: ' + err);
+});
 
 const normalizePort = val => {
   var port = parseInt(val, 10);

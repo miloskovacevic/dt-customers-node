@@ -1,6 +1,7 @@
 
 
 export class Customer {
+    _id: number;
     customerID: number;
     name: Name;
     birthday: any;
@@ -9,6 +10,7 @@ export class Customer {
     customerLifetimeValue: Number;
 
     constructor () {
+        this._id = 0;
         this.customerID = null;
         this.name = new Name();
         this.birthday = null;

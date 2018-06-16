@@ -26,9 +26,8 @@ export class EditComponent  implements OnInit, OnDestroy {
     customers: Customer[];
     activeRouter: ActivatedRoute;
 
-    constructor(private injector: Injector, private _customersListService: CustomersListService, private router:Router) {
+    constructor(private injector: Injector, private _customersListService: CustomersListService, private router: Router) {
         this.customer = new Customer();
-
         // this._ngxDefaultTimeout = setTimeout(() => {
         //     this._ngxDefaultInterval = setInterval(() => {
         //         const idx = Math.floor(Math.random() * (this.items.length - 1));
@@ -41,16 +40,16 @@ export class EditComponent  implements OnInit, OnDestroy {
         this.activeRouter = injector.get(ActivatedRoute);
         this.title = 'Edit';
 
-        this.customer.customerID = this.activeRouter.snapshot.params['id'];
+        this.customer._id = this.activeRouter.snapshot.params['id'];
 
-        if (this.customer.customerID == null) {
+        if (this.customer._id == null) {
             this.title = 'Add customer';
-            this.customer.customerID = 0;
+            this.customer._id = 0;
         } else {
-            this.customer = (<Customer[]>SessionCacheHelper.getGridData('customers')).find(c => c.customerID == this.customer.customerID);
-            // setting up right format for date picker...
-            this.customer.birthday = new Date(this.customer.birthday);
-            this.customer.lastContact = new Date(this.customer.lastContact);
+            // geting data for one customer
+            this.getCustomer(this.customer._id);
+
+            
 
             this.title = 'Edit customer';
         }
@@ -62,7 +61,7 @@ export class EditComponent  implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
+        
     }
 
     submit() {
@@ -95,7 +94,13 @@ export class EditComponent  implements OnInit, OnDestroy {
     }
 
     getCustomer(customerId: Number) {
-
+        this._customersListService.getCustomer(customerId).then((payload: {message: string, customer: Customer}) => {
+            console.log(payload);
+            this.customer = payload.customer;
+            // setting up right format for date picker...
+            this.customer.birthday = new Date(this.customer.birthday);
+            this.customer.lastContact = new Date(this.customer.lastContact);
+        });
     }
 
     getCustomers() {

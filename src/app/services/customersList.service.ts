@@ -12,14 +12,16 @@ export class CustomersListService {
     }
 
     getCustomer(customerId: Number) {
-        return this.http.get('./assets/customers-sample.json').toPromise()
-                .then((customers: Customer[]) => {
-                    let customer = customers.filter(c => c.customerID == customerId)[0];
-                    return customer;
-                })
-                .catch((err) => {
-                    return err;
-                });
+        return this.http.get<{message: string, customer: Customer}>(this.url + '/' + customerId).toPromise();
+
+        // return this.http.get('./assets/customers-sample.json').toPromise()
+        //         .then((customers: Customer[]) => {
+        //             let customer = customers.filter(c => c.customerID == customerId)[0];
+        //             return customer;
+        //         })
+        //         .catch((err) => {
+        //             return err;
+        //         });
     }
 
     getCustomers() {
@@ -34,6 +36,10 @@ export class CustomersListService {
             // update
             // return this.http.patch<{message: string, customer: Customer}>(this.url, customer).toPromise();
         }
+    }
+
+    deleteCustomer(customerId) {
+         return this.http.delete<{message: string}>(this.url + '/' + customerId).toPromise();
     }
 
 }
