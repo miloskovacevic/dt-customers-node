@@ -4,7 +4,7 @@
 // app.use(express.static(__dirname + '/dist'));
 // app.listen(process.env.port || 8080);
 
-const app = require("./backend/app");
+const app = require("./app");
 const debug = require("debug")("node-angular");
 const http = require("http");
 const mongoose = require('mongoose');
