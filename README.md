@@ -1,5 +1,10 @@
 # WebtrekkCustomers
 
+[![Build Status](https://travis-ci.org/miloskovacevic/dt-customers-node.svg?branch=master)](https://travis-ci.org/miloskovacevic/dt-customers-node)
+![license](https://img.shields.io/github/license/miloskovacevic/dt-customers-node.svg)
+![GitHub package version](https://img.shields.io/github/package-json/v/miloskovacevic/dt-customers-node.svg)
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
 ## Development server

@@ -3,6 +3,15 @@
 
 module.exports = function (config) {
   config.set({
+    autoWatch: false,
+    browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessNoSandbox'],
+     customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
+    
     basePath: '',
     frameworks: ['jasmine', '@angular/cli'],
     plugins: [
