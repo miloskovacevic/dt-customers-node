@@ -1,3 +1,4 @@
+import { Customer } from './../../common/models/customer';
 import { CustomersListComponent } from './../customersList.component';
 import { Observable } from 'rxjs/Observable';
 import { CustomersMockService } from './../../services/mock-services/CustomersMockService';
@@ -40,24 +41,37 @@ describe('Edit Customer Component', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(EditComponent);
         component = fixture.componentInstance;
-        // fixture.detectChanges();
     });
 
     it('should create component', () => {
         expect(component).toBeTruthy();
     });
 
-    // it(`should have as title ''`, () => {
-    //     const app = fixture.debugElement.componentInstance;
-    //     expect(app.title).toEqual(titleText);
-    // });
+    it(`should have as title ''`, () => {
+        const app = fixture.debugElement.componentInstance;
+        expect(app.title).toEqual('Add customer');
+    });
 
+    it('should call method saveCustomer when clicked on save customer button', async( () => {
+        spyOn(component, 'saveCustomer');
+        fixture.detectChanges();
+        let button = fixture.debugElement.query(By.css('#save-customer'));
+        let el: HTMLElement = button.nativeElement;
+        el.click();
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+            expect(component.saveCustomer).toHaveBeenCalled();
+        });
+    }));
 
+    it('should call the service to save the customer when a new customer is added', () => {
+        service = TestBed.get(CustomersListService);
+        let spy = spyOn(service, 'addCustomer').and.callFake((t) => {
+            return Promise.resolve();
+        });
 
+        component.submit();
 
-
-
-
-
-
+        expect(spy).toHaveBeenCalled();
+    });
 });

@@ -2,7 +2,7 @@ import { SessionCacheHelper } from './../../common/helpers/sessionCacheHelper';
 import { actionEnum } from './../../common/enums/actionEnum';
 import { Customer } from './../../common/models/customer';
 import { CustomersListService } from './../../services/customersList.service';
-import { Component, ViewChild, OnInit, Injector, HostListener, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, Injector, HostListener, OnDestroy, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -28,11 +28,12 @@ export class EditComponent  implements OnInit, OnDestroy {
     customers: Customer[];
     activeRouter: ActivatedRoute;
 
-    constructor(private injector: Injector, private _customersListService: CustomersListService, private router: Router) {
+    constructor(private injector: Injector, private _customersListService: CustomersListService, private router: Router, 
+                private elem: ElementRef) {
         this.customer = new Customer();
 
         this.activeRouter = injector.get(ActivatedRoute);
-        this.title = 'Edit';
+        this.title = '';
 
         this.customer._id = this.activeRouter.snapshot.params['id'];
 
@@ -55,6 +56,9 @@ export class EditComponent  implements OnInit, OnDestroy {
     }
 
     submit() {
+        // remove errors if exist from html template
+        this.removeErrors();
+
         if (this.customer.birthday instanceof Date) {
             this.customer.birthday = this.customer.birthday.toISOString();
         }
@@ -90,14 +94,8 @@ export class EditComponent  implements OnInit, OnDestroy {
         });
     }
 
-    getCustomers() {
-
-    }
-
     onInputChange() {
-
     }
-
 
     public doNgxDefault(): any {
         return this.customer.gender;
@@ -111,13 +109,18 @@ export class EditComponent  implements OnInit, OnDestroy {
  
     public doSelectOptions = (options: INgxSelectOptions[]) => console.log('SingleDemoComponent.doSelectOptions', options);
 
-
-
     errorHandler(errorJson) {
         Object.keys(errorJson).forEach((k) => {
             console.log(errorJson[k]);
             const htmlElement: HTMLElement =  document.getElementById(k);
             htmlElement.innerHTML = errorJson[k].message;
         });
+    }
+
+    removeErrors() {
+         let els = this.elem.nativeElement.querySelectorAll('.errorMessage');
+         els.forEach((el: HTMLElement) => {
+            el.innerText = '';
+         });
     }
 }

@@ -60,20 +60,20 @@ describe('Customers List Component', () => {
         expect(el.innerText).toContain(titleText);
     });
 
-    it('should have rendered ngx-datatable component', () => {
+    it('should render ngx-datatable component', () => {
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement;
         expect(compiled.querySelector('ngx-datatable')).not.toBe(null);
     });
 
-    it('should have called method getData when ngAfterContentInit executed', () => {
+    it('should call method getData when ngAfterContentInit executed', () => {
         spyOn(component, 'getData');
         component.ngAfterContentInit();
         fixture.detectChanges();
         expect(component.getData).toHaveBeenCalled();
     });
 
-    it('should have called service method getCustomers() when ngAfterContentInit executed', async(() => {
+    it('should call service method getCustomers() when ngAfterContentInit executed', async(() => {
         let service = TestBed.get(CustomersListService);
         component.ngAfterContentInit();
         fixture.detectChanges();

@@ -29,4 +29,8 @@ export class CustomersMockService {
  public getCustomers(): Promise<any> {
     return Promise.resolve(CUSTOMERS_OBJECT);
   }
+
+  public addCustomer(): Promise<any> {
+    return Promise.resolve();
+  }
 }

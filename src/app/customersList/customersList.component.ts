@@ -13,7 +13,6 @@ import { DeleteModalComponent } from './../common/modals/deleteModal/deleteModal
     templateUrl: './customersList.component.html'
 })
 export class CustomersListComponent implements OnInit, AfterContentInit {
-    
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('actionColumn') actionColumn: TemplateRef<any>;
@@ -52,6 +51,12 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
         this._customersListService.getCustomers()
         .then((data) => {
             this.data = data.customers;
+            this.data.forEach(customer => {
+                let dateAndTime = customer.lastContact.split('T');
+                let date = dateAndTime[0];
+                let time = dateAndTime[1];
+                customer.lastContact = date + ' at ' + time.split('.')[0];
+            });
             this.rows = this.data;
             SessionCacheHelper.setGridData('customers', this.data);
         })
