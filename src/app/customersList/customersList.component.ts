@@ -13,6 +13,7 @@ import { DeleteModalComponent } from './../common/modals/deleteModal/deleteModal
     templateUrl: './customersList.component.html'
 })
 export class CustomersListComponent implements OnInit, AfterContentInit {
+    
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('actionColumn') actionColumn: TemplateRef<any>;
@@ -23,8 +24,9 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
     rows = [];
     columns = [];
     sorts = [];
+    title: String = 'Webtrekk Customers List';
 
-    constructor(private _customersListService: CustomersListService) {
+    constructor(private _customersListService: CustomersListService, private router: Router) {
     }
 
     ngOnInit() {
@@ -59,6 +61,7 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
     }
 
     onRouteClick() {
+        this.router.navigate(['/customersList/add']);
     }
 
     deleteResource(customerID: number) {
