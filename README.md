@@ -1,4 +1,4 @@
-# WebtrekkCustomers
+# dt-customers-node
 
 [![Build Status](https://travis-ci.org/miloskovacevic/dt-customers-node.svg?branch=master)](https://travis-ci.org/miloskovacevic/dt-customers-node)
 ![license](https://img.shields.io/github/license/miloskovacevic/dt-customers-node.svg)
