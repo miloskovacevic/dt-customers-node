@@ -3,15 +3,6 @@
 
 module.exports = function (config) {
   config.set({
-    autoWatch: false,
-    browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessNoSandbox'],
-     customLaunchers: {
-      ChromeHeadlessNoSandbox: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox']
-      }
-    },
-    
     basePath: '',
     frameworks: ['jasmine', '@angular/cli'],
     plugins: [
@@ -35,8 +26,17 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
+
+    autoWatch: false,
+    browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessNoSandbox'],
+     customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
     singleRun: false
+
+    
   });
 };
