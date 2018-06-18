@@ -1,3 +1,23 @@
 .text-danger {
     color: red;
 }
+
+.custom-button-green {
+    background-color: #94bb10 !important; 
+    color: #fff !important;
+}
+
+.custom-button-blue {
+    background-color: #3399CC !important; 
+    color: #fff !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #94bb10;
+    border-color: #94bb10;
+}
+
+.theme-green .bs-datepicker-head {
+    background-color: #94bb10 !important;
+}

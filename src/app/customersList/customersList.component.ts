@@ -1,3 +1,4 @@
+import { LoaderComponent } from './../common/loaders/loader.component';
 import { SessionCacheHelper } from './../common/helpers/sessionCacheHelper';
 import { CustomersListService } from './../services/customersList.service';
 import { Customer } from './../common/models/customer';
@@ -10,13 +11,15 @@ import { DeleteModalComponent } from './../common/modals/deleteModal/deleteModal
 
 
 @Component({
-    templateUrl: './customersList.component.html'
+    templateUrl: './customersList.component.html',
+    styleUrls: ['./customersList.component.scss']
 })
 export class CustomersListComponent implements OnInit, AfterContentInit {
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('actionColumn') actionColumn: TemplateRef<any>;
     @ViewChild('deleteModal') public deleteModal: DeleteModalComponent;
+    @ViewChild('loader') public loader: LoaderComponent;
 
     public data: Array<Customer> = new Array<Customer>();
     public filter = '';
@@ -48,14 +51,19 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
     }
 
     getData() {
+        this.loader.show();
         this._customersListService.getCustomers()
         .then((data) => {
             this.data = data.customers;
             this.data.forEach(customer => {
-                let dateAndTime = customer.lastContact.split('T');
-                let date = dateAndTime[0];
-                let time = dateAndTime[1];
+                const dateAndTime = customer.lastContact.split('T');
+                const date = dateAndTime[0];
+                const time = dateAndTime[1];
                 customer.lastContact = date + ' at ' + time.split('.')[0];
+                setTimeout(() => {
+                    this.loader.hide();
+                }, 300);
+             
             });
             this.rows = this.data;
             SessionCacheHelper.setGridData('customers', this.data);
@@ -70,34 +78,16 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
     }
 
     deleteResource(customerID: number) {
-        this._customersListService.deleteCustomer(customerID)
-        .then((response) => {
-            // repsonse should be in some kind of modal
-            // here i call getemployees() to refresh data...
-            this.getData();
-        })
-        .catch((err) => {
-            // errors should be displayed in some kind of modal...
-            console.log(err);
+        this.deleteModal.show(() => {
+            this._customersListService.deleteCustomer(customerID)
+            .then((response) => {
+                this.getData();
+                this.deleteModal.hide();
+            })
+            .catch((err) => {
+                // errors should be displayed in some kind of modal...
+                console.log(err);
+            });
         });
-
-        // this.deleteModal.show(() => {
-        //     // this.deleteModal.loader.show();
-        
-        //     // this._userService.deleteUser(userId)
-        //     //     .then((data) => {
-        //     //         //SessionCacheHelper.setGridData('users', null);
-        //     //         this.getData(true);
-        //     //         //SessionCacheHelper.getCacheData('users', this.table, this.filter);
-        //     //         this.deleteModal.loader.hide();
-        //     //         this.deleteModal.hide();
-        //     //         //this.showPopupMessage(data);
-        //     //     })
-        //     //     .catch((err) => {
-        //     //         // this.showPopupMessage(err);
-        //     //         // this.deleteModal.loader.hide();
-        //     //         // this.deleteModal.hide();
-        //     //     });
-        // });
     }
 }

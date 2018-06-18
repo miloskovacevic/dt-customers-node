@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { LoaderComponent } from '../../../common/loaders/loader.component';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ModalDirective } from 'ngx-bootstrap/modal/modal.directive';
+import { LoaderComponent } from '../../common/loaders/loader.component';
+import { LocalData } from '../../common/data/localData';
 
 @Component({
     moduleId: module.id,
     selector: 'delete-modal',
     templateUrl: 'deleteModal.component.html',
-    styleUrls: ['./deleteModal.component.scss'],
     exportAs: 'deleteModal'
 })
 
@@ -18,6 +18,7 @@ export class DeleteModalComponent {
     localization: any;
 
     constructor() {
+        this.localization = LocalData.getTranslationData();
     }
 
     getLocalization(key: string) {

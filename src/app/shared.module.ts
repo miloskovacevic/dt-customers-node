@@ -1,3 +1,4 @@
+import { LoaderModule } from './common/loaders/loader.module';
 import { DeleteModalModule } from './common/modals/deleteModal/deleteModal.module';
 import { CommonModule } from '@angular/common';
 import { NgModule} from '@angular/core';
@@ -18,7 +19,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
         ReactiveFormsModule,
         SelectModule,
         DataTableModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        LoaderModule,
+        DeleteModalModule
     ],
     providers: [
     ]

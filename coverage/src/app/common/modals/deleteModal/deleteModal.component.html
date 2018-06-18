@@ -1,0 +1,19 @@
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" [config]="{backdrop: 'static', keyboard: false}" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-danger" role="document">
+        <div class="modal-content">
+            <loader #loader="loader"></loader>
+            <div class="modal-header">
+                <h4 style="color:white" class="modal-title">{{getLocalization('delete_data')}}</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{getLocalization('are_you_sure')}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary pointer" (click)="deleteModal.hide()">
+                    <i class="fa fa-times"></i> {{getLocalization('label_no')}}</button>
+                <button type="button" class="btn btn-success pointer" (click)="onDelete()">
+                    <i class="fa fa-check"></i> {{getLocalization('label_yes')}}</button>
+            </div>
+        </div>
+    </div>
+</div>

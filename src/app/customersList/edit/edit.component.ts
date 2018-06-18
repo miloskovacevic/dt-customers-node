@@ -1,8 +1,9 @@
+import { LoaderComponent } from './../../common/loaders/loader.component';
 import { SessionCacheHelper } from './../../common/helpers/sessionCacheHelper';
 import { actionEnum } from './../../common/enums/actionEnum';
 import { Customer } from './../../common/models/customer';
 import { CustomersListService } from './../../services/customersList.service';
-import { Component, ViewChild, OnInit, Injector, HostListener, OnDestroy, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, Injector, HostListener, OnDestroy, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSelectModule, INgxSelectOptions } from 'ngx-select-ex';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -14,7 +15,9 @@ import { HttpErrorResponse } from '@angular/common/http';
     styleUrls: ['./edit.component.scss']
 })
 
-export class EditComponent  implements OnInit, OnDestroy {
+export class EditComponent  implements OnInit, AfterViewInit, OnDestroy {
+    @ViewChild('loader') public loader: LoaderComponent;
+
     public items: string[] = ['m', 'w'];
 
     public ngxControl = new FormControl();
@@ -34,17 +37,7 @@ export class EditComponent  implements OnInit, OnDestroy {
 
         this.activeRouter = injector.get(ActivatedRoute);
         this.title = '';
-
         this.customer._id = this.activeRouter.snapshot.params['id'];
-
-        if (this.customer._id == null) {
-            this.title = 'Add customer';
-            this.customer._id = 0;
-        } else {
-            // geting data for one customer
-            this.getCustomer(this.customer._id);
-            this.title = 'Edit customer';
-        }
     }
 
     ngOnDestroy(): void {
@@ -53,6 +46,17 @@ export class EditComponent  implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+    }
+
+    ngAfterViewInit() {
+        if (this.customer._id == null) {
+            this.title = 'Add customer';
+            this.customer._id = 0;
+        } else {
+            // geting data for one customer
+            this.getCustomer(this.customer._id);
+            this.title = 'Edit customer';
+        }
     }
 
     submit() {
@@ -85,12 +89,16 @@ export class EditComponent  implements OnInit, OnDestroy {
     }
 
     getCustomer(customerId: Number) {
+        this.loader.show();
         this._customersListService.getCustomer(customerId).then((payload: {message: string, customer: Customer}) => {
             console.log(payload);
             this.customer = payload.customer;
             // setting up right format for date picker...
             this.customer.birthday = new Date(this.customer.birthday);
             this.customer.lastContact = new Date(this.customer.lastContact);
+            setTimeout(() => {
+                this.loader.hide();
+            }, 300);
         });
     }
 

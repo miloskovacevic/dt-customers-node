@@ -1,18 +1,17 @@
-
-    <div class="col-lg-12" style="margin-top: 2%; border: 1px solid #9EFF98; padding: 1%;">
+    <div class="col-lg-12" style="margin-top: 2%; border: 1px solid #94bb10; padding: 1%;">
         <div class="row">
-           
         </div>
         <div class="row">
             <div class="col-md-12 col-sm-12" *ngIf="customer"> 
                 <form id="editUser" name="form" #f="ngForm" novalidate (keydown.enter)="$event.preventDefault()" autocomplete="false">
+                    <loader #loader="loader"></loader>
                     <div class="row">
                         <div class="col-md-offset-3 col-md-6" style="border: 1px solid #FDE7D9; padding: 1%;">
                             <div>
                                 <h4>{{title}}</h4>
                             </div> 
                             <div style="margin-bottom: 2%;">
-                                    Personal data 
+                                Personal data 
                             </div>
                             
                             <div class="row">
@@ -95,8 +94,8 @@
                 <div class="row">
                     <div class="col-md-9"></div>
                     <div class="col-md-3">
-                        <a class="btn btn-warning" [routerLink]="['/customersList']"><i class="fa fa-times"></i>Back</a>
-                         <button id="save-customer" class="btn btn-success pointer"  (click)="submit()"><i class="glyphicon glyphicon-ok"></i> Save customer</button>
+                        <a class="btn custom-button-blue" [routerLink]="['/customersList']"><i class="fa fa-times"></i>Back</a>
+                         <button id="save-customer" class="btn custom-button-green pointer"  (click)="submit()"><i class="glyphicon glyphicon-ok"></i> Save customer</button>
                     </div>
                 </div>
             </div>

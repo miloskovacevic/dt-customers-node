@@ -3,16 +3,18 @@
         <div class="modal-content">
             <loader #loader="loader"></loader>
             <div class="modal-header">
-                <h5 class="modal-title">{{getLocalization('title_delete_data').toUpperCase()}}</h5>
+                <span>
+                    <h4><span><i class="glyphicon glyphicon-warning-sign"></i> DELETE CUSTOMER</span></h4>
+                </span>
             </div>
             <div class="modal-body">
-                <p>{{getLocalization('label_are_you_sure')}}</p>
+                <p>Are you sure?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary pointer" (click)="deleteModal.hide()">
-                    <i class="fa fa-times"></i> {{getLocalization('button_cancel').toUpperCase()}}</button>
-                <button type="button" class="btn btn-rb pointer" (click)="onDelete()">
-                    <i class="fa fa-check"></i> {{getLocalization('button_confirm').toUpperCase()}}</button>
+                <button type="button" class="btn  custom-button-green pointer" (click)="deleteModal.hide()">
+                    <i class="fa fa-times"></i> CANCEL </button>
+                <button type="button" class="btn  custom-button-blue pointer" (click)="onDelete()">
+                    <i class="fa fa-check"></i> CONFIRM </button>
             </div>
         </div>
     </div>
