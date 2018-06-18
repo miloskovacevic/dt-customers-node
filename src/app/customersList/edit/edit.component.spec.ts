@@ -47,7 +47,7 @@ describe('Edit Customer Component', () => {
         expect(component).toBeTruthy();
     });
 
-    it(`should have as title ''`, () => {
+    it(`should have as title 'Add customer'`, () => {
         const app = fixture.debugElement.componentInstance;
         expect(app.title).toEqual('Add customer');
     });
@@ -69,9 +69,7 @@ describe('Edit Customer Component', () => {
         let spy = spyOn(service, 'addCustomer').and.callFake((t) => {
             return Promise.resolve();
         });
-
         component.submit();
-
         expect(spy).toHaveBeenCalled();
     });
 });

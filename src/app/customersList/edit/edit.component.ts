@@ -26,7 +26,7 @@ export class EditComponent  implements OnInit, AfterViewInit, OnDestroy {
     private _ngxDefaultInterval;
     private _ngxDefault;
 
-    title: string;
+    title: string = 'Add customer';
     customer: Customer;
     customers: Customer[];
     activeRouter: ActivatedRoute;
@@ -36,7 +36,6 @@ export class EditComponent  implements OnInit, AfterViewInit, OnDestroy {
         this.customer = new Customer();
 
         this.activeRouter = injector.get(ActivatedRoute);
-        this.title = '';
         this.customer._id = this.activeRouter.snapshot.params['id'];
     }
 

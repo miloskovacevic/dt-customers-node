@@ -63,7 +63,6 @@ export class CustomersListComponent implements OnInit, AfterContentInit {
                 setTimeout(() => {
                     this.loader.hide();
                 }, 300);
-             
             });
             this.rows = this.data;
             SessionCacheHelper.setGridData('customers', this.data);
