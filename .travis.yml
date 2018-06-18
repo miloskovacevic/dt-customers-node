@@ -19,7 +19,9 @@
   
 
 dist: trusty
-sudo: false
+sudo: required
+addons:
+  chrome: stable
 
 language: node_js
 node_js:
