@@ -6,6 +6,9 @@
 
 
 dt-customers-node is a simple CRUD application built with MEAN stack.
+For data persistence mLab was used - cloud database service that hosts MongoDB databases.
+<a href="https://mlab.com/" target="_blank">mLab</a>
+
 
 ## Development server
 
